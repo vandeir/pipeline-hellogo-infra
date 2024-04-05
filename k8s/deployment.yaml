@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <APPNAME>
-  namespace: <NAMESPACE>
+  name: hellogo
+  namespace: default
   labels:
-     app: <APPNAME>
+    app: hellogo
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: <APPNAME>
+      app: hellogo
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: <APPNAME>
+        app: hellogo
         tier: frontend
     spec:
       securityContext:
@@ -28,43 +28,43 @@ spec:
         runAsGroup: 1001
         fsGroup: 1001
       containers:
-      - image: <IMAGE>
-        resources:
-          requests:
-            cpu: 25m
-            memory: 50Mi
-          limits:
-            cpu: 75m
-            memory: 100Mi
-        imagePullPolicy: Always
-        name: <APPNAME>
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities: {}
-          privileged: false
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-        ports:
-        - containerPort: 8080
-          name: http
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /
-            port: http
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /
-            port: http
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          failureThreshold: 3
-        stdin: true
-        tty: true
+        - image: paulovigne/hellogo-pipeline:e5c19a1
+          resources:
+            requests:
+              cpu: 25m
+              memory: 50Mi
+            limits:
+              cpu: 75m
+              memory: 100Mi
+          imagePullPolicy: Always
+          name: hellogo
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          stdin: true
+          tty: true
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
