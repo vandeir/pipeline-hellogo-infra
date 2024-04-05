@@ -5,10 +5,10 @@ metadata:
   namespace: <NAMESPACE>
 spec:
   ports:
-  - name: tcp-<APPNAME>
+  - name: http
     port: 8080
     protocol: TCP
-    targetPort: tcp-<APPNAME>
+    targetPort: http
   selector:
     app: <APPNAME>
   type: ClusterIP
