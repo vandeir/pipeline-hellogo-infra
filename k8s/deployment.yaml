@@ -47,19 +47,19 @@ spec:
           runAsNonRoot: true
         ports:
         - containerPort: 8080
-          name: tcp-<APPNAME>
+          name: http
           protocol: TCP
         readinessProbe:
           httpGet:
             path: /
-            port: tcp-<APPNAME>
+            port: http
           initialDelaySeconds: 5
           periodSeconds: 10
           failureThreshold: 3
         livenessProbe:
           httpGet:
             path: /
-            port: tcp-<APPNAME>
+            port: http
           initialDelaySeconds: 5
           periodSeconds: 10
           failureThreshold: 3
