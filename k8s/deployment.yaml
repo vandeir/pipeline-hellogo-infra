@@ -28,7 +28,7 @@ spec:
         runAsGroup: 1001
         fsGroup: 1001
       containers:
-        - image: paulovigne/hellogo-pipeline:master-19
+        - image: paulovigne/hellogo-pipeline:master-20
           resources:
             requests:
               cpu: 25m
