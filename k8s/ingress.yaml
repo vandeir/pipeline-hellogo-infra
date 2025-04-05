@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: pipeline.44.199.161.208.sslip.io
+    - host: hellogo.3.224.32.82.sslip.io
       http:
         paths:
           - backend:
